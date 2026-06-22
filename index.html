@@ -1,409 +1,414 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CDB e CDI - Guia Completo para Investidores</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CDB e CDI - Guia Completo para Investidores</title>
 
-<meta name="description" content="Aprenda o que é CDB e CDI, como funcionam os rendimentos, tributação, FGC e simule seus ganhos com nossa calculadora.">
-<meta name="keywords" content="CDB, CDI, investimentos, renda fixa, FGC, simulador CDB">
-<meta name="author" content="Seu Nome">
+    <meta name="description"
+        content="Aprenda o que é CDB e CDI, como funcionam os rendimentos, tributação, FGC e simule seus ganhos com nossa calculadora.">
+    <meta name="keywords" content="CDB, CDI, investimentos, renda fixa, FGC, simulador CDB">
+    <meta name="author" content="Seu Nome">
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Arial, sans-serif;
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
 
-body{
-    background:#f4f7fb;
-    color:#333;
-    line-height:1.6;
-}
+        body {
+            background: #f4f7fb;
+            color: #333;
+            line-height: 1.6;
+        }
 
-header{
-    background:#0b3d91;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
+        header {
+            background: #0b3d91;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
 
-nav{
-    background:#082c6c;
-    position:sticky;
-    top:0;
-    z-index:100;
-}
+        nav {
+            background: #082c6c;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
 
-nav ul{
-    display:flex;
-    justify-content:center;
-    list-style:none;
-    flex-wrap:wrap;
-}
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
 
-nav ul li{
-    margin:10px;
-}
+        nav ul li {
+            margin: 10px;
+        }
 
-nav ul li a{
-    color:white;
-    text-decoration:none;
-    font-weight:bold;
-}
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
 
-nav ul li a:hover{
-    color:#4caf50;
-}
+        nav ul li a:hover {
+            color: #4caf50;
+        }
 
-.container{
-    width:90%;
-    max-width:1200px;
-    margin:auto;
-    padding:30px 0;
-}
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: auto;
+            padding: 30px 0;
+        }
 
-section{
-    margin-bottom:50px;
-}
+        section {
+            margin-bottom: 50px;
+        }
 
-h2{
-    color:#0b3d91;
-    margin-bottom:15px;
-}
+        h2 {
+            color: #0b3d91;
+            margin-bottom: 15px;
+        }
 
-.card{
-    background:white;
-    padding:20px;
-    border-radius:12px;
-    box-shadow:0 2px 10px rgba(0,0,0,.1);
-}
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+        }
 
-table{
-    width:100%;
-    border-collapse:collapse;
-    margin-top:20px;
-}
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
 
-table th{
-    background:#0b3d91;
-    color:white;
-}
+        table th {
+            background: #0b3d91;
+            color: white;
+        }
 
-table th, table td{
-    border:1px solid #ddd;
-    padding:12px;
-    text-align:center;
-}
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+        }
 
-.grid{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:20px;
-}
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
 
-.positive{
-    border-left:5px solid #4caf50;
-}
+        .positive {
+            border-left: 5px solid #4caf50;
+        }
 
-.negative{
-    border-left:5px solid #f44336;
-}
+        .negative {
+            border-left: 5px solid #f44336;
+        }
 
-.calculator input{
-    width:100%;
-    padding:10px;
-    margin:8px 0;
-}
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+        }
 
-button{
-    background:#4caf50;
-    color:white;
-    border:none;
-    padding:12px 20px;
-    cursor:pointer;
-    border-radius:6px;
-    font-size:16px;
-}
+        button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            cursor: pointer;
+            border-radius: 6px;
+            font-size: 16px;
+        }
 
-button:hover{
-    background:#3d9140;
-}
+        button:hover {
+            background: #3d9140;
+        }
 
-.result{
-    margin-top:20px;
-    padding:15px;
-    background:#e8f5e9;
-    border-radius:8px;
-}
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background: #e8f5e9;
+            border-radius: 8px;
+        }
 
-.faq-item{
-    margin-bottom:15px;
-}
+        .faq-item {
+            margin-bottom: 15px;
+        }
 
-footer{
-    background:#0b3d91;
-    color:white;
-    text-align:center;
-    padding:20px;
-}
-</style>
+        footer {
+            background: #0b3d91;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+    </style>
 </head>
+
 <body>
 
-<header>
-    <h1>Guia Completo de CDB e CDI</h1>
-    <p>Entenda como funciona a renda fixa e faça simulações.</p>
-</header>
+    <header>
+        <h1>Guia Completo de CDB e CDI</h1>
+        <p>Entenda como funciona a renda fixa e faça simulações.</p>
+    </header>
 
-<nav>
-<ul>
-<li><a href="#cdb">CDB</a></li>
-<li><a href="#cdi">CDI</a></li>
-<li><a href="#comparacao">Comparação</a></li>
-<li><a href="#calculadora">Calculadora</a></li>
-<li><a href="#grafico">Gráfico</a></li>
-<li><a href="#faq">FAQ</a></li>
-</ul>
-</nav>
+    <nav>
+        <ul>
+            <li><a href="#cdb">CDB</a></li>
+            <li><a href="#cdi">CDI</a></li>
+            <li><a href="#comparacao">Comparação</a></li>
+            <li><a href="#calculadora">Calculadora</a></li>
+            <li><a href="#grafico">Gráfico</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
 
-<div class="container">
+    <div class="container">
 
-<section id="cdb">
-<div class="card">
-<h2>O que é CDB?</h2>
-<p>
-CDB (Certificado de Depósito Bancário) é um investimento de renda fixa emitido por bancos.
-Ao investir em um CDB, você empresta dinheiro para a instituição financeira e recebe juros em troca.
-</p>
+        <section id="cdb">
+            <div class="card">
+                <h2>O que é CDB?</h2>
+                <p>
+                    CDB (Certificado de Depósito Bancário) é um investimento de renda fixa emitido por bancos.
+                    Ao investir em um CDB, você empresta dinheiro para a instituição financeira e recebe juros em troca.
+                </p>
 
-<div class="grid" style="margin-top:20px;">
-<div class="card positive">
-<h3>Vantagens</h3>
-<ul>
-<li>Baixo risco</li>
-<li>Rentabilidade previsível</li>
-<li>Proteção do FGC</li>
-<li>Diversas opções de prazo</li>
-</ul>
-</div>
+                <div class="grid" style="margin-top:20px;">
+                    <div class="card positive">
+                        <h3>Vantagens</h3>
+                        <ul>
+                            <li>Baixo risco</li>
+                            <li>Rentabilidade previsível</li>
+                            <li>Proteção do FGC</li>
+                            <li>Diversas opções de prazo</li>
+                        </ul>
+                    </div>
 
-<div class="card negative">
-<h3>Desvantagens</h3>
-<ul>
-<li>Incidência de IR</li>
-<li>Liquidez pode ser limitada</li>
-<li>Alguns possuem carência</li>
-</ul>
-</div>
-</div>
-</div>
-</section>
+                    <div class="card negative">
+                        <h3>Desvantagens</h3>
+                        <ul>
+                            <li>Incidência de IR</li>
+                            <li>Liquidez pode ser limitada</li>
+                            <li>Alguns possuem carência</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-<section id="cdi">
-<div class="card">
-<h2>O que é CDI?</h2>
-<p>
-CDI (Certificado de Depósito Interbancário) é uma taxa utilizada como referência para investimentos de renda fixa.
-Grande parte dos CDBs oferece rendimento baseado em um percentual do CDI.
-</p>
+        <section id="cdi">
+            <div class="card">
+                <h2>O que é CDI?</h2>
+                <p>
+                    CDI (Certificado de Depósito Interbancário) é uma taxa utilizada como referência para investimentos
+                    de renda fixa.
+                    Grande parte dos CDBs oferece rendimento baseado em um percentual do CDI.
+                </p>
 
-<p style="margin-top:15px;">
-Exemplo:
-<ul>
-<li>100% do CDI = acompanha a taxa CDI.</li>
-<li>110% do CDI = rende 10% acima da taxa CDI.</li>
-<li>120% do CDI = rende 20% acima da taxa CDI.</li>
-</ul>
-</p>
-</div>
-</section>
+                <p style="margin-top:15px;">
+                    Exemplo:
+                <ul>
+                    <li>100% do CDI = acompanha a taxa CDI.</li>
+                    <li>110% do CDI = rende 10% acima da taxa CDI.</li>
+                    <li>120% do CDI = rende 20% acima da taxa CDI.</li>
+                </ul>
+                </p>
+            </div>
+        </section>
 
-<section>
-<div class="card">
-<h2>FGC (Fundo Garantidor de Créditos)</h2>
-<p>
-O FGC protege investimentos em instituições financeiras até R$ 250.000 por CPF e por instituição,
-limitado a R$ 1 milhão a cada período de 4 anos.
-</p>
-</div>
-</section>
+        <section>
+            <div class="card">
+                <h2>FGC (Fundo Garantidor de Créditos)</h2>
+                <p>
+                    O FGC protege investimentos em instituições financeiras até R$ 250.000 por CPF e por instituição,
+                    limitado a R$ 1 milhão a cada período de 4 anos.
+                </p>
+            </div>
+        </section>
 
-<section>
-<div class="card">
-<h2>Tributação do CDB</h2>
+        <section>
+            <div class="card">
+                <h2>Tributação do CDB</h2>
 
-<table>
-<tr>
-<th>Prazo</th>
-<th>IR</th>
-</tr>
-<tr>
-<td>Até 180 dias</td>
-<td>22,5%</td>
-</tr>
-<tr>
-<td>181 a 360 dias</td>
-<td>20%</td>
-</tr>
-<tr>
-<td>361 a 720 dias</td>
-<td>17,5%</td>
-</tr>
-<tr>
-<td>Acima de 720 dias</td>
-<td>15%</td>
-</tr>
-</table>
+                <table>
+                    <tr>
+                        <th>Prazo</th>
+                        <th>IR</th>
+                    </tr>
+                    <tr>
+                        <td>Até 180 dias</td>
+                        <td>22,5%</td>
+                    </tr>
+                    <tr>
+                        <td>181 a 360 dias</td>
+                        <td>20%</td>
+                    </tr>
+                    <tr>
+                        <td>361 a 720 dias</td>
+                        <td>17,5%</td>
+                    </tr>
+                    <tr>
+                        <td>Acima de 720 dias</td>
+                        <td>15%</td>
+                    </tr>
+                </table>
 
-</div>
-</section>
+            </div>
+        </section>
 
-<section id="comparacao">
-<div class="card">
-<h2>Comparação de Investimentos</h2>
+        <section id="comparacao">
+            <div class="card">
+                <h2>Comparação de Investimentos</h2>
 
-<table>
-<tr>
-<th>Característica</th>
-<th>Poupança</th>
-<th>CDB</th>
-<th>Tesouro Direto</th>
-</tr>
+                <table>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Poupança</th>
+                        <th>CDB</th>
+                        <th>Tesouro Direto</th>
+                    </tr>
 
-<tr>
-<td>Rentabilidade</td>
-<td>Baixa</td>
-<td>Média/Alta</td>
-<td>Média/Alta</td>
-</tr>
+                    <tr>
+                        <td>Rentabilidade</td>
+                        <td>Baixa</td>
+                        <td>Média/Alta</td>
+                        <td>Média/Alta</td>
+                    </tr>
 
-<tr>
-<td>FGC</td>
-<td>Sim</td>
-<td>Sim</td>
-<td>Não</td>
-</tr>
+                    <tr>
+                        <td>FGC</td>
+                        <td>Sim</td>
+                        <td>Sim</td>
+                        <td>Não</td>
+                    </tr>
 
-<tr>
-<td>Liquidez</td>
-<td>Alta</td>
-<td>Variável</td>
-<td>Alta</td>
-</tr>
+                    <tr>
+                        <td>Liquidez</td>
+                        <td>Alta</td>
+                        <td>Variável</td>
+                        <td>Alta</td>
+                    </tr>
 
-<tr>
-<td>Imposto</td>
-<td>Não</td>
-<td>Sim</td>
-<td>Sim</td>
-</tr>
-</table>
+                    <tr>
+                        <td>Imposto</td>
+                        <td>Não</td>
+                        <td>Sim</td>
+                        <td>Sim</td>
+                    </tr>
+                </table>
 
-</div>
-</section>
+            </div>
+        </section>
 
-<section id="calculadora">
-<div class="card calculator">
+        <section id="calculadora">
+            <div class="card calculator">
 
-<h2>Calculadora de Rendimento CDB</h2>
+                <h2>Calculadora de Rendimento CDB</h2>
 
-<label>Valor Investido (R$)</label>
-<input type="number" id="valor" value="10000">
+                <label>Valor Investido (R$)</label>
+                <input type="number" id="valor" value="10000">
 
-<label>Prazo (meses)</label>
-<input type="number" id="meses" value="12">
+                <label>Prazo (meses)</label>
+                <input type="number" id="meses" value="12">
 
-<label>% do CDI</label>
-<input type="number" id="percentual" value="110">
+                <label>% do CDI</label>
+                <input type="number" id="percentual" value="110">
 
-<label>CDI Anual (%)</label>
-<input type="number" id="cdi" value="14.15" step="0.01">
+                <label>CDI Anual (%)</label>
+                <input type="number" id="cdi" value="14.15" step="0.01">
 
-<button onclick="calcular()">Calcular</button>
+                <button onclick="calcular()">Calcular</button>
 
-<div class="result" id="resultado"></div>
+                <div class="result" id="resultado"></div>
 
-</div>
-</section>
+            </div>
+        </section>
 
-<section id="grafico">
-<div class="card">
-<h2>Comparação de Crescimento</h2>
-<canvas id="graficoRendimento"></canvas>
-</div>
-</section>
+        <section id="grafico">
+            <div class="card">
+                <h2>Comparação de Crescimento</h2>
+                <canvas id="graficoRendimento"></canvas>
+            </div>
+        </section>
 
-<section id="faq">
-<div class="card">
-<h2>Perguntas Frequentes</h2>
+        <section id="faq">
+            <div class="card">
+                <h2>Perguntas Frequentes</h2>
 
-<div class="faq-item">
-<h3>CDB é seguro?</h3>
-<p>Sim, especialmente quando protegido pelo FGC.</p>
-</div>
+                <div class="faq-item">
+                    <h3>CDB é seguro?</h3>
+                    <p>Sim, especialmente quando protegido pelo FGC.</p>
+                </div>
 
-<div class="faq-item">
-<h3>Quanto rende 100% do CDI?</h3>
-<p>Rende aproximadamente igual à taxa CDI vigente.</p>
-</div>
+                <div class="faq-item">
+                    <h3>Quanto rende 100% do CDI?</h3>
+                    <p>Rende aproximadamente igual à taxa CDI vigente.</p>
+                </div>
 
-<div class="faq-item">
-<h3>Vale mais a pena que a poupança?</h3>
-<p>Na maioria dos cenários, sim.</p>
-</div>
+                <div class="faq-item">
+                    <h3>Vale mais a pena que a poupança?</h3>
+                    <p>Na maioria dos cenários, sim.</p>
+                </div>
 
-<div class="faq-item">
-<h3>Posso resgatar antes do vencimento?</h3>
-<p>Depende da liquidez oferecida pelo CDB.</p>
-</div>
+                <div class="faq-item">
+                    <h3>Posso resgatar antes do vencimento?</h3>
+                    <p>Depende da liquidez oferecida pelo CDB.</p>
+                </div>
 
-</div>
-</section>
+            </div>
+        </section>
 
-</div>
+    </div>
 
-<footer>
-<p>© 2026 - Guia CDB e CDI</p>
-</footer>
+    <footer>
+        <p>© 2026 - Guia CDB e CDI</p>
+    </footer>
 
-<script>
+    <script>
 
-let chart;
+        let chart;
 
-function aliquotaIR(dias){
+        function aliquotaIR(dias) {
 
-    if(dias <= 180) return 22.5;
-    if(dias <= 360) return 20;
-    if(dias <= 720) return 17.5;
-    return 15;
-}
+            if (dias <= 180) return 22.5;
+            if (dias <= 360) return 20;
+            if (dias <= 720) return 17.5;
+            return 15;
+        }
 
-function calcular(){
+        function calcular() {
 
-    const valor = parseFloat(document.getElementById("valor").value);
-    const meses = parseInt(document.getElementById("meses").value);
-    const percentual = parseFloat(document.getElementById("percentual").value);
-    const cdi = parseFloat(document.getElementById("cdi").value);
+            const valor = parseFloat(document.getElementById("valor").value);
+            const meses = parseInt(document.getElementById("meses").value);
+            const percentual = parseFloat(document.getElementById("percentual").value);
+            const cdi = parseFloat(document.getElementById("cdi").value);
 
-    const taxaAnual = cdi * (percentual/100);
-    const taxaMensal = taxaAnual / 12 / 100;
+            const taxaAnual = cdi * (percentual / 100);
+            const taxaMensal = taxaAnual / 12 / 100;
 
-    const montante = valor * Math.pow((1 + taxaMensal), meses);
+            const montante = valor * Math.pow((1 + taxaMensal), meses);
 
-    const rendimento = montante - valor;
+            const rendimento = montante - valor;
 
-    const dias = meses * 30;
+            const dias = meses * 30;
 
-    const ir = rendimento * (aliquotaIR(dias)/100);
+            const ir = rendimento * (aliquotaIR(dias) / 100);
 
-    const liquido = montante - ir;
+            const liquido = montante - ir;
 
-    document.getElementById("resultado").innerHTML = `
+            document.getElementById("resultado").innerHTML = `
         <h3>Resultado</h3>
         <p><strong>Montante Bruto:</strong> R$ ${montante.toFixed(2)}</p>
         <p><strong>Rendimento:</strong> R$ ${rendimento.toFixed(2)}</p>
@@ -411,39 +416,40 @@ function calcular(){
         <p><strong>Montante Líquido:</strong> R$ ${liquido.toFixed(2)}</p>
     `;
 
-    atualizarGrafico(valor, montante);
-}
-
-function atualizarGrafico(valorInicial, valorFinal){
-
-    const ctx = document.getElementById("graficoRendimento");
-
-    if(chart){
-        chart.destroy();
-    }
-
-    chart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Investimento Inicial', 'Valor Final'],
-            datasets: [{
-                label: 'R$',
-                data: [valorInicial, valorFinal],
-                backgroundColor: [
-                    '#0b3d91',
-                    '#4caf50'
-                ]
-            }]
-        },
-        options: {
-            responsive:true
+            atualizarGrafico(valor, montante);
         }
-    });
-}
 
-calcular();
+        function atualizarGrafico(valorInicial, valorFinal) {
 
-</script>
+            const ctx = document.getElementById("graficoRendimento");
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Investimento Inicial', 'Valor Final'],
+                    datasets: [{
+                        label: 'R$',
+                        data: [valorInicial, valorFinal],
+                        backgroundColor: [
+                            '#0b3d91',
+                            '#4caf50'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true
+                }
+            });
+        }
+
+        calcular();
+
+    </script>
 
 </body>
+
 </html>
